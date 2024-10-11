@@ -5,71 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title></title>
 <style type="text/css">
-/**
- * Prism.s theme ported from highlight.js's xcode style
- */
-pre code {
-  padding: 1em;
-}
-.token.comment {
-  color: #007400;
-}
-.token.punctuation {
-  color: #999;
-}
-.token.tag,
-.token.selector {
-  color: #aa0d91;
-}
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol {
-  color: #1c00cf;
-}
-.token.property,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin {
-  color: #c41a16;
-}
-.token.inserted {
-  background-color: #ccffd8;
-}
-.token.deleted {
-  background-color: #ffebe9;
-}
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  color: #9a6e3a;
-}
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  color: #836c28;
-}
-.token.function,
-.token.class-name {
-  color: #DD4A68;
-}
-.token.regex,
-.token.important,
-.token.variable {
-  color: #5c2699;
-}
-.token.important,
-.token.bold {
-  font-weight: bold;
-}
-.token.italic {
-  font-style: italic;
-}
-</style>
-<style type="text/css">
 body {
   font-family: sans-serif;
   max-width: 800px;
@@ -145,24 +80,41 @@ section.footnotes::before {
 <div class="date"><h3></h3></div>
 </div>
 <div class="body">
-<pre><code class="language-r">`````{r}
-````{r}
----
-title: &quot;Assignment 1 Reproducible Research&quot;
-author: &quot;LM&quot;
-date: &quot;2024-10-09&quot;
-output: html_document
----
-
+<p>title: “Assignment 1 Reproducible Research”
+author: “LM”
+date: “2024-10-09”
+output: html_document</p>
+<pre><code>
 ## Loading and preprocessing the data 
 
 **Process/transform the data (if necessary) for your analysis**
 
-```{r data, echo=TRUE}
+
+``` r
 data&lt;- read.csv(&quot;activity.csv&quot;)
+```
+
+```
+## Warning in file(file, &quot;rt&quot;): cannot open file 'activity.csv': No such file or directory
+```
+
+```
+## Error in file(file, &quot;rt&quot;): cannot open the connection
+```
+
+``` r
 steps &lt;- na.omit(data)
 head(steps)
+```
 
+```
+##     steps       date interval
+## 289     0 2012-10-02        0
+## 290     0 2012-10-02        5
+## 291     0 2012-10-02       10
+## 292     0 2012-10-02       15
+## 293     0 2012-10-02       20
+## 294     0 2012-10-02       25
 ```
 ## What is mean total number of steps taken per day?
 
@@ -172,18 +124,42 @@ head(steps)
 
 **- Calculate and report the mean and median of the total number of steps taken per day**
 
-```{r activity, echo=TRUE}
 
+``` r
 library(dplyr)
 steps2 &lt;- steps %&gt;% group_by(date) %&gt;% summarize(tot_steps=sum(steps))
 head(steps2)
+```
 
+```
+## # A tibble: 6 × 2
+##   date       tot_steps
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 2012-10-02       126
+## 2 2012-10-03     11352
+## 3 2012-10-04     12116
+## 4 2012-10-05     13294
+## 5 2012-10-06     15420
+## 6 2012-10-07     11015
+```
+
+``` r
 library(ggplot2)
 histogram &lt;- ggplot(steps2, aes(tot_steps))
 histogram + geom_histogram(color=&quot;black&quot;, fill=&quot;darkgreen&quot;, bins= 30) + theme_minimal() + labs(title= &quot;Total steps taken per day&quot;, x= &quot;Tot_steps day&quot;, y= &quot;Count&quot;)
+```
 
+![plot of chunk activity](figure/activity-1.png)
+
+``` r
 summarise(steps2, median= median(tot_steps), mean= mean(tot_steps))
+```
 
+```
+## # A tibble: 1 × 2
+##   median   mean
+##    &lt;int&gt;  &lt;dbl&gt;
+## 1  10765 10766.
 ```
 
 ## What is the average daily activity pattern?
@@ -192,15 +168,40 @@ summarise(steps2, median= median(tot_steps), mean= mean(tot_steps))
 
 **- Which 5-min interval, on average across all the days in the dataset, contains the maximum number of steps?**
 
-```{r daily pattern, echo=TRUE}
 
+``` r
 interval_5&lt;- steps %&gt;% group_by(interval) %&gt;% summarize(mean= mean(steps))
 head(interval_5)
+```
 
+```
+## # A tibble: 6 × 2
+##   interval   mean
+##      &lt;int&gt;  &lt;dbl&gt;
+## 1        0 1.72  
+## 2        5 0.340 
+## 3       10 0.132 
+## 4       15 0.151 
+## 5       20 0.0755
+## 6       25 2.09
+```
+
+``` r
 time_series&lt;- ggplot(interval_5, aes(interval,mean))
 time_series+ geom_line(color=&quot;darkgreen&quot;)+ theme_classic() + labs(title=&quot;Average number of steps in 5-minutes intervals&quot;, y=&quot;Steps&quot;, x=&quot;5- min Intervals&quot;)
+```
 
+![plot of chunk daily pattern](figure/daily pattern-1.png)
+
+``` r
 interval_5[which.max(interval_5$mean),]
+```
+
+```
+## # A tibble: 1 × 2
+##   interval  mean
+##      &lt;int&gt; &lt;dbl&gt;
+## 1      835  206.
 ```
 
 ## Imputing missing values
@@ -221,29 +222,90 @@ interval_5[which.max(interval_5$mean),]
  ` The difference between the datasets can be appreciated in the two histogram:` 
  ` in green the histogram of the dataset W/O missing values; in blue the histogram of the datset with filled in values`
 
-```{r missing values, echo=TRUE}
+
+``` r
 data2 &lt;- is.na(data)
 colSums(data2)
+```
 
+```
+##    steps     date interval 
+##     2304        0        0
+```
+
+``` r
 new_dataset &lt;- merge(data, interval_5, by=&quot;interval&quot;)
 head(new_dataset)
+```
 
+```
+##   interval steps       date     mean
+## 1        0    NA 2012-10-01 1.716981
+## 2        0     0 2012-11-23 1.716981
+## 3        0     0 2012-10-28 1.716981
+## 4        0     0 2012-11-06 1.716981
+## 5        0     0 2012-11-24 1.716981
+## 6        0     0 2012-11-15 1.716981
+```
+
+``` r
 dataset &lt;- new_dataset %&gt;% mutate(steps= coalesce(steps, mean)) %&gt;% select(&quot;steps&quot;, &quot;date&quot;, &quot;interval&quot;) %&gt;% arrange(date)
 head(dataset)
+```
 
+```
+##       steps       date interval
+## 1 1.7169811 2012-10-01        0
+## 2 0.3396226 2012-10-01        5
+## 3 0.1320755 2012-10-01       10
+## 4 0.1509434 2012-10-01       15
+## 5 0.0754717 2012-10-01       20
+## 6 2.0943396 2012-10-01       25
+```
+
+``` r
 steps_new &lt;- dataset %&gt;% group_by(date) %&gt;% summarize(tot_steps=sum(steps))
 head(steps_new)
+```
 
+```
+## # A tibble: 6 × 2
+##   date       tot_steps
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 2012-10-01    10766.
+## 2 2012-10-02      126 
+## 3 2012-10-03    11352 
+## 4 2012-10-04    12116 
+## 5 2012-10-05    13294 
+## 6 2012-10-06    15420
+```
+
+``` r
 hist_new&lt;- ggplot(steps_new, aes(tot_steps))
 hist_new + geom_histogram(color=&quot;black&quot;, fill=&quot;blue&quot;, bins= 30) + theme_minimal()
+```
 
+![plot of chunk missing values](figure/missing values-1.png)
+
+``` r
 summarise(steps_new, median= median(tot_steps), mean= mean(tot_steps))
+```
 
+```
+## # A tibble: 1 × 2
+##   median   mean
+##    &lt;dbl&gt;  &lt;dbl&gt;
+## 1 10766. 10766.
+```
+
+``` r
 library(gridExtra)
 plot1 &lt;- histogram + geom_histogram(color=&quot;black&quot;, fill=&quot;darkgreen&quot;, bins= 30) + theme_minimal() + labs(x=&quot;&quot;, y=&quot;Count&quot;)
 plot2 &lt;- hist_new + geom_histogram(color=&quot;black&quot;, fill=&quot;blue&quot;, bins= 30) + theme_minimal() + labs(x= &quot;Total steps per day&quot;, y=&quot;Count&quot;)
 grid.arrange(plot1, plot2, top= &quot;Comparison between original data and filled values&quot;)
 ```
+
+![plot of chunk missing values](figure/missing values-2.png)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -257,26 +319,93 @@ Use the dataset with the filled-in missing values for this part.
 
 `Weekday days are in green and Weekend days are in purple`
 
-```{r days, echo=TRUE}
+
+``` r
 dataset$date= as.Date(as.character(dataset$date))
 head(dataset)
+```
+
+```
+##       steps       date interval
+## 1 1.7169811 2012-10-01        0
+## 2 0.3396226 2012-10-01        5
+## 3 0.1320755 2012-10-01       10
+## 4 0.1509434 2012-10-01       15
+## 5 0.0754717 2012-10-01       20
+## 6 2.0943396 2012-10-01       25
+```
+
+``` r
 class(dataset$date)
+```
+
+```
+## [1] &quot;Date&quot;
+```
+
+``` r
 dataset_days &lt;- dataset %&gt;% mutate(weekday=weekdays(date))
 head(dataset_days)
+```
+
+```
+##       steps       date interval weekday
+## 1 1.7169811 2012-10-01        0  Monday
+## 2 0.3396226 2012-10-01        5  Monday
+## 3 0.1320755 2012-10-01       10  Monday
+## 4 0.1509434 2012-10-01       15  Monday
+## 5 0.0754717 2012-10-01       20  Monday
+## 6 2.0943396 2012-10-01       25  Monday
+```
+
+``` r
 dataset_days$WD_WE &lt;- as.factor(ifelse(dataset_days$weekday== &quot;Saturday&quot; | dataset_days$weekday== &quot;Sunday&quot;, &quot;Weekend&quot;, &quot;Weekday&quot;))
 head(dataset_days)
+```
+
+```
+##       steps       date interval weekday   WD_WE
+## 1 1.7169811 2012-10-01        0  Monday Weekday
+## 2 0.3396226 2012-10-01        5  Monday Weekday
+## 3 0.1320755 2012-10-01       10  Monday Weekday
+## 4 0.1509434 2012-10-01       15  Monday Weekday
+## 5 0.0754717 2012-10-01       20  Monday Weekday
+## 6 2.0943396 2012-10-01       25  Monday Weekday
+```
+
+``` r
 average_WD_WE &lt;- dataset_days %&gt;% select(&quot;steps&quot;, &quot;interval&quot;, &quot;WD_WE&quot;) %&gt;% group_by(interval, WD_WE) %&gt;% summarize(mean= mean(steps))
+```
+
+```
+## `summarise()` has grouped output by 'interval'. You can override using the `.groups` argument.
+```
+
+``` r
 head(average_WD_WE)
+```
+
+```
+## # A tibble: 6 × 3
+## # Groups:   interval [3]
+##   interval WD_WE     mean
+##      &lt;int&gt; &lt;fct&gt;    &lt;dbl&gt;
+## 1        0 Weekday 2.25  
+## 2        0 Weekend 0.215 
+## 3        5 Weekday 0.445 
+## 4        5 Weekend 0.0425
+## 5       10 Weekday 0.173 
+## 6       10 Weekend 0.0165
+```
+
+``` r
 plot_days &lt;- ggplot(average_WD_WE, aes(colour=WD_WE, x=interval, y=mean)) + geom_line(linewidth=1) + facet_grid(WD_WE~.) + theme_light()
 plot_days+ scale_color_brewer(palette = &quot;Accent&quot;)+ labs(y=&quot;Steps&quot;, x=&quot;5-min Intervals&quot;)
 ```
-````
-`````
-</code></pre>
-<pre><code>## Error: attempt to use zero-length variable name
+
+![plot of chunk days](figure/days-1.png)
+
 </code></pre>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 </body>
 </html>
