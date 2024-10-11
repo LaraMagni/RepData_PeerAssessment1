@@ -1,6 +1,7 @@
 
 
-````` r
+`````` r
+`````{r}
 ````{r}
 ---
 title: "Assignment 1 Reproducible Research"
@@ -127,6 +128,7 @@ plot_days+ scale_color_brewer(palette = "Accent")+ labs(y="Steps", x="5-min Inte
 ```
 ````
 `````
+``````
 
 ```
 ## Error: attempt to use zero-length variable name
