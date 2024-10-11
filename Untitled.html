@@ -93,6 +93,17 @@ output: html_document</p>
 
 ``` r
 data&lt;- read.csv(&quot;activity.csv&quot;)
+```
+
+```
+## Warning in file(file, &quot;rt&quot;): cannot open file 'activity.csv': No such file or directory
+```
+
+```
+## Error in file(file, &quot;rt&quot;): cannot open the connection
+```
+
+``` r
 steps &lt;- na.omit(data)
 head(steps)
 ```
