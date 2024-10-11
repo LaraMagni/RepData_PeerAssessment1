@@ -59,7 +59,7 @@ histogram <- ggplot(steps2, aes(tot_steps))
 histogram + geom_histogram(color="black", fill="darkgreen", bins= 30) + theme_minimal() + labs(title= "Total steps taken per day", x= "Tot_steps day", y= "Count")
 ```
 
-![plot of chunk activity](figure/activity-1.png)
+![plot of chunk activity](figure\activity-1.png)
 
 ``` r
 summarise(steps2, median= median(tot_steps), mean= mean(tot_steps))
@@ -101,7 +101,7 @@ time_series<- ggplot(interval_5, aes(interval,mean))
 time_series+ geom_line(color="darkgreen")+ theme_classic() + labs(title="Average number of steps in 5-minutes intervals", y="Steps", x="5- min Intervals")
 ```
 
-![plot of chunk daily pattern](figure/daily pattern-1.png)
+![plot of chunk daily pattern](figure\daily pattern-1.png)
 
 ``` r
 interval_5[which.max(interval_5$mean),]
@@ -195,7 +195,7 @@ hist_new<- ggplot(steps_new, aes(tot_steps))
 hist_new + geom_histogram(color="black", fill="blue", bins= 30) + theme_minimal()
 ```
 
-![plot of chunk missing values](figure/missing values-1.png)
+![plot of chunk missing values](figure\missing values-1.png)
 
 ``` r
 summarise(steps_new, median= median(tot_steps), mean= mean(tot_steps))
@@ -215,7 +215,7 @@ plot2 <- hist_new + geom_histogram(color="black", fill="blue", bins= 30) + theme
 grid.arrange(plot1, plot2, top= "Comparison between original data and filled values")
 ```
 
-![plot of chunk missing values](figure/missing values-2.png)
+![plot of chunk missing values](figure\missing values-2.png)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -313,4 +313,4 @@ plot_days <- ggplot(average_WD_WE, aes(colour=WD_WE, x=interval, y=mean)) + geom
 plot_days+ scale_color_brewer(palette = "Accent")+ labs(y="Steps", x="5-min Intervals")
 ```
 
-![plot of chunk days](figure/days-1.png)
+![plot of chunk days](figure\days-1.png)
