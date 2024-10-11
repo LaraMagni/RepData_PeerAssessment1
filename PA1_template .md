@@ -1,6 +1,7 @@
 
 
-```` r
+````` r
+````{r}
 ---
 title: "Assignment 1 Reproducible Research"
 author: "LM"
@@ -125,11 +126,9 @@ plot_days <- ggplot(average_WD_WE, aes(colour=WD_WE, x=interval, y=mean)) + geom
 plot_days+ scale_color_brewer(palette = "Accent")+ labs(y="Steps", x="5-min Intervals")
 ```
 ````
+`````
 
 ```
-## Error: <text>:10:1: unexpected '^'
-## 9: 
-## 10: **
-##     ^
+## Error: attempt to use zero-length variable name
 ```
 
