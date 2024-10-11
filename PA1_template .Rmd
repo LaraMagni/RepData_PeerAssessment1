@@ -1,13 +1,10 @@
 
-``````{r}
-`````{r}
-````{r}
----
 title: "Assignment 1 Reproducible Research"
 author: "LM"
 date: "2024-10-09"
 output: html_document
----
+
+````
 
 ## Loading and preprocessing the data 
 
@@ -125,7 +122,5 @@ head(average_WD_WE)
 plot_days <- ggplot(average_WD_WE, aes(colour=WD_WE, x=interval, y=mean)) + geom_line(linewidth=1) + facet_grid(WD_WE~.) + theme_light()
 plot_days+ scale_color_brewer(palette = "Accent")+ labs(y="Steps", x="5-min Intervals")
 ```
-````
-`````
-``````
+
 
