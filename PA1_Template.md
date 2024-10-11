@@ -74,6 +74,13 @@ head(steps2)
 
 ``` r
 library(ggplot2)
+```
+
+```
+## Want to understand how all the pieces fit together? Read R for Data Science: https://r4ds.hadley.nz/
+```
+
+``` r
 histogram <- ggplot(steps2, aes(tot_steps))
 histogram + geom_histogram(color="black", fill="darkgreen", bins= 30) + theme_minimal() + labs(title= "Total steps taken per day", x= "Tot_steps day", y= "Count")
 ```
@@ -347,4 +354,3 @@ plot_days+ scale_color_brewer(palette = "Accent")+ labs(y="Steps", x="5-min Inte
 ```
 
 ![plot of chunk days](figure/days-1.png)
-
