@@ -43,7 +43,7 @@ summarise(steps2, median= median(tot_steps), mean= mean(tot_steps))
 
 **- Which 5-min interval, on average across all the days in the dataset, contains the maximum number of steps?**
 
-```{r daily pattern, echo=TRUE}
+```{r daily_pattern, echo=TRUE}
 
 interval_5<- steps %>% group_by(interval) %>% summarize(mean= mean(steps))
 head(interval_5)
@@ -72,7 +72,7 @@ interval_5[which.max(interval_5$mean),]
  ` The difference between the datasets can be appreciated in the two histogram:` 
  ` in green the histogram of the dataset W/O missing values; in blue the histogram of the datset with filled in values`
 
-```{r missing values, echo=TRUE}
+```{r missing_values, echo=TRUE}
 data2 <- is.na(data)
 colSums(data2)
 
